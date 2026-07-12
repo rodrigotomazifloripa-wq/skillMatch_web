@@ -11,7 +11,7 @@ ordenação, tema claro/escuro e perfil salvo entre visitas.
 ## 🔗 Links
 
 - **Repositório:** <https://github.com/rodrigotomazifloripa-wq/skillMatch_web>
-- **Aplicação (GitHub Pages):** _adicionar link após o deploy_
+- **Aplicação no ar (GitHub Pages):** <https://rodrigotomazifloripa-wq.github.io/skillMatch_web/>
 - **Quadro Kanban (Trello):** _adicionar link do quadro_
 - **Vídeo de apresentação:** _adicionar link do vídeo_
 
