@@ -1,0 +1,12 @@
+{
+  "name": "skillmatch-web",
+  "version": "1.0.0",
+  "description": "Aplicação web que compara o perfil de um candidato com vagas de front-end júnior e calcula o percentual de compatibilidade.",
+  "type": "module",
+  "scripts": {
+    "dev": "npx live-server --port=5500"
+  },
+  "author": "Rodrigo Tomazi",
+  "license": "MIT",
+  "private": true
+}
