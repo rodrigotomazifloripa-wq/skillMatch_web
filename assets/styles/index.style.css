@@ -23,6 +23,34 @@
   --cor-baixa-texto: #7f1d1d;
 }
 
+/* Tema escuro: só troca as variáveis — o restante do CSS não muda.
+   O atributo data-theme é aplicado no <html> pelo JavaScript. */
+[data-theme="escuro"] {
+  --cor-fundo: #101820;
+  --cor-superficie: #1a2530;
+  --cor-texto: #e6edf3;
+  --cor-texto-suave: #a8b8c8;
+  --cor-primaria: #7cb8f0;
+  --cor-primaria-forte: #a3ccf5;
+  --cor-borda: #33445a;
+  --cor-erro: #ff9a91;
+  --cor-alta-fundo: #14402a;
+  --cor-alta-texto: #a7e3bd;
+  --cor-media-fundo: #4d3a10;
+  --cor-media-texto: #f4d58d;
+  --cor-baixa-fundo: #4a1f1f;
+  --cor-baixa-texto: #f5b5b0;
+}
+
+/* Ajustes pontuais para manter contraste no tema escuro */
+[data-theme="escuro"] .botao--primario {
+  color: #0b2239;
+}
+
+[data-theme="escuro"] .icone-decorativo {
+  filter: brightness(1.9);
+}
+
 /* ===== Reset básico ===== */
 * {
   box-sizing: border-box;

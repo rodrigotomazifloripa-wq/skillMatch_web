@@ -138,10 +138,40 @@ seletorOrdenacao.addEventListener("change", () => {
   renderizarComFiltros();
 });
 
-// Restaura a preferência de ordenação salva em visitas anteriores
+/* ===== Tema claro/escuro ===== */
+
+const botaoTema = document.querySelector("#botao-tema");
+const TEMA_ESCURO = "escuro";
+const TEMA_CLARO = "claro";
+
+/** Aplica o tema no <html> e atualiza o texto/estado do botão. */
+function aplicarTema(tema) {
+  const escuroAtivo = tema === TEMA_ESCURO;
+
+  if (escuroAtivo) {
+    document.documentElement.setAttribute("data-theme", TEMA_ESCURO);
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+
+  botaoTema.setAttribute("aria-pressed", String(escuroAtivo));
+  botaoTema.textContent = escuroAtivo ? "☀️ Tema claro" : "🌙 Tema escuro";
+}
+
+botaoTema.addEventListener("click", () => {
+  const temaAtual = document.documentElement.getAttribute("data-theme");
+  const novoTema = temaAtual === TEMA_ESCURO ? TEMA_CLARO : TEMA_ESCURO;
+  aplicarTema(novoTema);
+  salvarPreferencia("tema", novoTema);
+});
+
+// Restaura as preferências salvas em visitas anteriores (tema e ordenação)
 const preferencias = carregarPreferencias();
 if (preferencias.ordenacao) {
   seletorOrdenacao.value = preferencias.ordenacao;
+}
+if (preferencias.tema) {
+  aplicarTema(preferencias.tema);
 }
 
 // Na abertura da página, recupera o perfil salvo (null na primeira visita)
