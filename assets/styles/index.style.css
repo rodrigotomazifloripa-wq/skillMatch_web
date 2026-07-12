@@ -221,6 +221,18 @@ select:focus-visible {
   background-color: var(--cor-fundo);
 }
 
+/* ===== Controles de filtro e ordenação ===== */
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.controles .campo {
+  flex: 1 1 12rem;
+}
+
 /* ===== Painel do perfil analisado ===== */
 .painel-perfil:not(:empty) {
   border: 1px solid var(--cor-borda);

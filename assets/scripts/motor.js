@@ -182,6 +182,38 @@ export function recomendarEstudo(resultados) {
 }
 
 /**
+ * Filtra os resultados pela modalidade da vaga ("todas" não filtra nada).
+ */
+export function filtrarPorModalidade(resultados, modalidade) {
+  if (modalidade === "todas") {
+    return resultados;
+  }
+  return resultados.filter((resultado) => resultado.vaga.modalidade === modalidade);
+}
+
+/**
+ * Reordena os resultados pelo critério escolhido pelo usuário.
+ * Trabalha numa cópia para não bagunçar a ordem original por compatibilidade.
+ */
+export function ordenarResultados(resultados, criterio) {
+  const copia = resultados.slice();
+
+  switch (criterio) {
+    case "salario":
+      copia.sort((a, b) => b.vaga.salario - a.vaga.salario);
+      break;
+    case "empresa":
+      copia.sort((a, b) => a.vaga.empresa.localeCompare(b.vaga.empresa));
+      break;
+    default:
+      // "compatibilidade": mantém a ordem que veio de analisarVagas
+      break;
+  }
+
+  return copia;
+}
+
+/**
  * Closure: `totalAnalises` fica preservada entre as chamadas da função
  * retornada, funcionando como um contador privado de análises da sessão
  * (ninguém de fora consegue alterar o valor diretamente).
