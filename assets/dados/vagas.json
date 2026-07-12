@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "area": "front-end",
+    "empresa": "Conecta Digital",
+    "cargo": "Desenvolvedor Front-End Júnior",
+    "requisitos": ["html", "css", "javascript", "flexbox", "git"],
+    "salario": 2800,
+    "modalidade": "híbrido",
+    "stack": "HTML/CSS/JS",
+    "experienciaMinimaMeses": 0
+  },
+  {
+    "id": 2,
+    "area": "front-end",
+    "empresa": "Litoral Sistemas",
+    "cargo": "Desenvolvedor Web Júnior",
+    "requisitos": ["html", "css", "javascript", "responsividade", "acessibilidade"],
+    "salario": 3100,
+    "modalidade": "remoto",
+    "stack": "HTML/CSS/JS",
+    "experienciaMinimaMeses": 6
+  },
+  {
+    "id": 3,
+    "area": "front-end",
+    "empresa": "Agência Farol",
+    "cargo": "Front-End Júnior (Landing Pages)",
+    "requisitos": ["html", "css", "flexbox", "seo", "figma"],
+    "salario": 2400,
+    "modalidade": "presencial",
+    "stack": "HTML/CSS",
+    "experienciaMinimaMeses": 0
+  },
+  {
+    "id": 4,
+    "area": "front-end",
+    "empresa": "TechNorte",
+    "cargo": "Desenvolvedor Front-End Pleno",
+    "requisitos": ["html", "css", "javascript", "git", "acessibilidade", "consumo de api"],
+    "salario": 5200,
+    "modalidade": "remoto",
+    "stack": "HTML/CSS/JS",
+    "experienciaMinimaMeses": 24
+  },
+  {
+    "id": 5,
+    "area": "dados",
+    "empresa": "DataSul Analytics",
+    "cargo": "Estagiário de Dados",
+    "requisitos": ["lógica de programação", "sql", "excel"],
+    "salario": 1600,
+    "modalidade": "híbrido"
+  },
+  {
+    "id": 6,
+    "area": "ux-ui",
+    "empresa": "Estúdio Maré",
+    "cargo": "Assistente de UX/UI",
+    "requisitos": ["figma", "prototipação", "html", "css"],
+    "salario": 2100,
+    "modalidade": "presencial"
+  }
+]
