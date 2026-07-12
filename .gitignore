@@ -1,0 +1,10 @@
+# Dependências (usadas apenas como conforto de dev, a aplicação roda sem Node)
+node_modules/
+
+# Configurações locais de editor
+.vscode/
+.idea/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
