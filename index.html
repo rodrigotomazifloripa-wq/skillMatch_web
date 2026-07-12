@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillMatch — Compatibilidade entre seu perfil e vagas de front-end</title>
+  <meta name="description"
+    content="Compare suas habilidades com os requisitos de vagas de front-end júnior, veja o percentual de compatibilidade de cada vaga e receba uma recomendação de estudo.">
+  <link rel="icon" href="./assets/img/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/styles/index.style.css">
+  <script type="module" src="./assets/scripts/main.js"></script>
+</head>
+<body>
+  <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <header class="cabecalho">
+    <div class="cabecalho__identidade">
+      <img class="cabecalho__logo" src="./assets/img/logo.svg" alt="Logotipo do SkillMatch" width="48" height="48">
+      <div>
+        <h1>SkillMatch</h1>
+        <p class="cabecalho__slogan">Descubra o quanto seu perfil combina com as vagas de front-end.</p>
+      </div>
+    </div>
+    <nav class="menu" aria-label="Navegação principal">
+      <ul class="menu__lista">
+        <li><a href="#perfil">Meu perfil</a></li>
+        <li><a href="#vagas">Vagas</a></li>
+      </ul>
+    </nav>
+    <button type="button" id="botao-tema" class="botao botao--secundario"
+      aria-pressed="false">🌙 Tema escuro</button>
+  </header>
+
+  <main id="conteudo" class="conteudo">
+    <section id="perfil" class="secao" aria-labelledby="titulo-perfil">
+      <h2 id="titulo-perfil">Meu perfil</h2>
+      <p>Preencha seus dados para comparar suas habilidades com os requisitos de cada vaga.</p>
+
+      <form id="formulario-perfil" class="formulario" novalidate>
+        <div class="campo">
+          <label for="campo-nome">Nome *</label>
+          <input type="text" id="campo-nome" name="nome" autocomplete="name"
+            required aria-describedby="erro-nome">
+          <span class="mensagem-erro" id="erro-nome"></span>
+        </div>
+
+        <div class="campo">
+          <label for="campo-area">Área de interesse *</label>
+          <select id="campo-area" name="area" required aria-describedby="erro-area">
+            <option value="">Selecione uma área</option>
+            <option value="front-end">Front-End</option>
+            <option value="back-end">Back-End</option>
+            <option value="full-stack">Full-Stack</option>
+            <option value="dados">Dados</option>
+            <option value="ux-ui">UX/UI</option>
+          </select>
+          <span class="mensagem-erro" id="erro-area"></span>
+        </div>
+
+        <div class="campo">
+          <label for="campo-habilidades">Habilidades *</label>
+          <input type="text" id="campo-habilidades" name="habilidades"
+            required aria-describedby="ajuda-habilidades erro-habilidades">
+          <p class="campo__ajuda" id="ajuda-habilidades">
+            Separe as habilidades por vírgula. Exemplo: html, css, javascript, git
+          </p>
+          <span class="mensagem-erro" id="erro-habilidades"></span>
+        </div>
+
+        <div class="campo">
+          <label for="campo-experiencia">Experiência em meses (opcional)</label>
+          <input type="number" id="campo-experiencia" name="experienciaMeses"
+            min="0" step="1" inputmode="numeric" aria-describedby="ajuda-experiencia">
+          <p class="campo__ajuda" id="ajuda-experiencia">
+            Usada como critério de desempate entre vagas com a mesma compatibilidade.
+          </p>
+        </div>
+
+        <div class="formulario__acoes">
+          <button type="submit" class="botao botao--primario">Analisar compatibilidade</button>
+          <button type="button" id="botao-limpar" class="botao botao--secundario">Limpar perfil salvo</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="vagas" class="secao" aria-labelledby="titulo-vagas">
+      <h2 id="titulo-vagas">
+        <img class="icone-decorativo" src="./assets/img/alvo.svg" alt="" width="24" height="24">
+        Resultado da análise
+      </h2>
+
+      <div class="controles">
+        <div class="campo">
+          <label for="filtro-modalidade">Filtrar por modalidade</label>
+          <select id="filtro-modalidade">
+            <option value="todas" selected>Todas</option>
+            <option value="remoto">Remoto</option>
+            <option value="híbrido">Híbrido</option>
+            <option value="presencial">Presencial</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="ordenacao">Ordenar por</label>
+          <select id="ordenacao">
+            <option value="compatibilidade" selected>Compatibilidade</option>
+            <option value="salario">Maior salário</option>
+            <option value="empresa">Empresa (A–Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="painel-perfil" class="painel-perfil"></div>
+
+      <p id="estado" class="estado" role="status" aria-live="polite">
+        Preencha o formulário acima e clique em “Analisar compatibilidade” para ver as vagas.
+      </p>
+
+      <div id="destaque" class="destaque"></div>
+
+      <ul id="lista-vagas" class="lista-vagas"></ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p>SkillMatch — projeto de estudo de desenvolvimento front-end.</p>
+    <p>Desenvolvido por Rodrigo Tomazi.</p>
+  </footer>
+</body>
+</html>
