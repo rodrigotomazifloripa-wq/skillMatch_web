@@ -108,3 +108,89 @@ export function criarVagas(dadosVagas) {
     dados.area === "front-end" ? new VagaFrontEnd(dados) : new Vaga(dados)
   );
 }
+
+/**
+ * Analisa todas as vagas para um candidato e devolve os resultados ordenados
+ * da maior para a menor compatibilidade. Em caso de empate no percentual,
+ * a experiência do candidato desempata: vagas cuja experiência mínima ele
+ * atende aparecem primeiro (uso do experienciaMeses do perfil).
+ *
+ * `aoConcluir` é um callback opcional chamado com os resultados prontos —
+ * quem chama decide o que fazer com eles (ex.: renderizar na tela).
+ */
+export function analisarVagas(candidato, vagas, aoConcluir) {
+  const resultados = vagas.map((vaga) =>
+    vaga.analisarCandidato(candidato.habilidades)
+  );
+
+  const experiencia = candidato.experienciaMeses || 0;
+  resultados.sort((a, b) => {
+    if (b.percentual !== a.percentual) {
+      return b.percentual - a.percentual;
+    }
+    // Empate: quem atende a experiência mínima da vaga vem antes
+    const desempateA = a.vaga.atendeExperiencia(experiencia) ? 1 : 0;
+    const desempateB = b.vaga.atendeExperiencia(experiencia) ? 1 : 0;
+    return desempateB - desempateA;
+  });
+
+  if (typeof aoConcluir === "function") {
+    aoConcluir(resultados);
+  }
+
+  return resultados;
+}
+
+/**
+ * Encontra o melhor resultado com reduce (a lista já pode estar em qualquer ordem).
+ */
+export function melhorResultado(resultados) {
+  if (resultados.length === 0) {
+    return null;
+  }
+  return resultados.reduce(
+    (melhor, atual) => (atual.percentual > melhor.percentual ? atual : melhor)
+  );
+}
+
+// Quantas vezes cada habilidade pode aparecer na recomendação de estudo
+const LIMITE_HABILIDADES_RECOMENDADAS = 3;
+
+/**
+ * Gera a recomendação de estudo: conta quantas vezes cada habilidade aparece
+ * como faltante entre todas as vagas (laço explícito for...of) e sugere as
+ * mais frequentes — estudá-las destrava o maior número de vagas de uma vez.
+ */
+export function recomendarEstudo(resultados) {
+  const contagemFaltantes = {};
+
+  for (const resultado of resultados) {
+    for (const habilidade of resultado.faltantes) {
+      contagemFaltantes[habilidade] = (contagemFaltantes[habilidade] || 0) + 1;
+    }
+  }
+
+  const maisFrequentes = Object.keys(contagemFaltantes)
+    .sort((a, b) => contagemFaltantes[b] - contagemFaltantes[a])
+    .slice(0, LIMITE_HABILIDADES_RECOMENDADAS);
+
+  if (maisFrequentes.length === 0) {
+    return "Seu perfil cobre todos os requisitos das vagas analisadas. Continue praticando!";
+  }
+
+  return `Estude ${maisFrequentes.join(", ")} — são as habilidades que mais aparecem como faltantes nas vagas.`;
+}
+
+/**
+ * Closure: `totalAnalises` fica preservada entre as chamadas da função
+ * retornada, funcionando como um contador privado de análises da sessão
+ * (ninguém de fora consegue alterar o valor diretamente).
+ */
+export function criarContadorAnalises() {
+  let totalAnalises = 0;
+
+  return function registrarAnalise() {
+    totalAnalises = totalAnalises + 1;
+    return totalAnalises;
+  };
+}
