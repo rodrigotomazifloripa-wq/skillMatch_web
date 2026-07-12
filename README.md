@@ -12,7 +12,7 @@ ordenação, tema claro/escuro e perfil salvo entre visitas.
 
 - **Repositório:** <https://github.com/rodrigotomazifloripa-wq/skillMatch_web>
 - **Aplicação no ar (GitHub Pages):** <https://rodrigotomazifloripa-wq.github.io/skillMatch_web/>
-- **Quadro Kanban (Trello):** _adicionar link do quadro_
+- **Quadro Kanban (Trello):** <https://trello.com/b/LaTinLbc>
 - **Vídeo de apresentação:** _adicionar link do vídeo_
 
 ## 🧩 O problema que ele resolve
