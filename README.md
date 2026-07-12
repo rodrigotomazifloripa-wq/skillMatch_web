@@ -10,6 +10,7 @@ ordenação, tema claro/escuro e perfil salvo entre visitas.
 
 ## 🔗 Links
 
+- **Repositório:** <https://github.com/rodrigotomazifloripa-wq/skillMatch_web>
 - **Aplicação (GitHub Pages):** _adicionar link após o deploy_
 - **Quadro Kanban (Trello):** _adicionar link do quadro_
 - **Vídeo de apresentação:** _adicionar link do vídeo_
@@ -32,7 +33,7 @@ local:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/SEU-USUARIO/skillmatch-web.git
+   git clone https://github.com/rodrigotomazifloripa-wq/skillMatch_web.git
    ```
 2. Abra a pasta no VS Code.
 3. Clique com o botão direito no `index.html` e escolha **"Open with Live Server"**
