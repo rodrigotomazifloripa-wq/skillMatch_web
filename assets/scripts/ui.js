@@ -98,3 +98,138 @@ export function preencherFormulario(perfil) {
   document.querySelector("#campo-experiencia").value =
     perfil.experienciaMeses > 0 ? perfil.experienciaMeses : "";
 }
+
+/* ===== Estados da tela (carregando / vazio / erro) ===== */
+
+/**
+ * Mostra uma mensagem de estado na área de resultados.
+ * O elemento tem aria-live="polite", então leitores de tela anunciam
+ * a mudança sem roubar o foco do usuário.
+ */
+export function mostrarEstado(mensagem, ehErro = false) {
+  const estado = document.querySelector("#estado");
+  estado.textContent = mensagem;
+  estado.classList.remove("estado--oculto");
+  estado.classList.toggle("estado--erro", ehErro);
+}
+
+/** Esconde a mensagem de estado (usado no caminho de sucesso). */
+export function ocultarEstado() {
+  document.querySelector("#estado").classList.add("estado--oculto");
+}
+
+/* ===== Renderização dos resultados (DOM criado por JavaScript) ===== */
+
+/** Atalho para criar um elemento já com classe e texto. */
+function criarElemento(tag, classe = "", texto = "") {
+  const elemento = document.createElement(tag);
+  if (classe !== "") {
+    elemento.className = classe;
+  }
+  if (texto !== "") {
+    elemento.textContent = texto;
+  }
+  return elemento;
+}
+
+/** Formata o salário em reais para exibição nos cards. */
+function formatarSalario(salario) {
+  return salario.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+/** Cria a lista rotulada de habilidades (encontradas ou faltantes) do card. */
+function criarListaHabilidades(rotulo, habilidades) {
+  const bloco = criarElemento("div", "card-vaga__detalhes");
+  bloco.append(criarElemento("p", "", rotulo));
+
+  if (habilidades.length === 0) {
+    bloco.append(criarElemento("p", "", "— nenhuma —"));
+    return bloco;
+  }
+
+  const lista = criarElemento("ul");
+  habilidades.forEach((habilidade) => {
+    lista.append(criarElemento("li", "", habilidade));
+  });
+  bloco.append(lista);
+  return bloco;
+}
+
+// Converte a classificação do motor no sufixo da classe CSS do selo
+const CLASSE_SELO = { Alta: "alta", "Média": "media", Baixa: "baixa" };
+
+/**
+ * Monta o card de uma vaga inteiramente com createElement/classList,
+ * a partir do resultado calculado pelo motor.
+ */
+export function criarCardVaga(resultado) {
+  const { vaga, percentual, classificacao, encontradas, faltantes } = resultado;
+
+  const card = criarElemento("li", "card-vaga");
+  card.append(
+    criarElemento("span", `selo selo--${CLASSE_SELO[classificacao]}`, `Compatibilidade ${classificacao}`),
+    criarElemento("h3", "", vaga.rotuloExibicao()),
+    criarElemento("p", "card-vaga__empresa", `${vaga.modalidade} · ${formatarSalario(vaga.salario)}`),
+    criarElemento("p", "card-vaga__percentual", `${percentual}%`),
+    criarListaHabilidades("Você já tem:", encontradas),
+    criarListaHabilidades("Falta estudar:", faltantes)
+  );
+
+  return card;
+}
+
+/** Renderiza todos os cards de vaga na lista de resultados. */
+export function renderizarResultados(resultados) {
+  const lista = document.querySelector("#lista-vagas");
+  lista.textContent = "";
+  resultados.forEach((resultado) => {
+    lista.append(criarCardVaga(resultado));
+  });
+}
+
+/**
+ * Mostra o resumo do perfil analisado, incluindo a experiência em meses
+ * (que também é usada pelo motor como critério de desempate).
+ */
+export function renderizarPerfilResumo(perfil) {
+  const painel = criarElemento("div");
+  painel.append(
+    criarElemento("p", "", `Perfil analisado: ${perfil.nome} — área de ${perfil.area}`),
+    criarElemento(
+      "p",
+      "campo__ajuda",
+      `${perfil.habilidades.length} habilidade(s) informada(s) · ${perfil.experienciaMeses} mês(es) de experiência`
+    )
+  );
+
+  const destino = document.querySelector("#painel-perfil");
+  destino.textContent = "";
+  destino.append(painel);
+}
+
+/**
+ * Destaca a vaga mais compatível, a recomendação de estudo e o total de
+ * análises feitas na sessão (valor vindo da closure do motor).
+ */
+export function renderizarDestaque(melhor, recomendacao, totalAnalises) {
+  const destaque = document.querySelector("#destaque");
+  destaque.textContent = "";
+
+  if (melhor === null) {
+    return;
+  }
+
+  destaque.append(
+    criarElemento("h3", "", "⭐ Vaga mais compatível com seu perfil"),
+    criarElemento("p", "", `${melhor.vaga.rotuloExibicao()} — ${melhor.percentual}% de compatibilidade`),
+    criarElemento("p", "", recomendacao),
+    criarElemento("p", "campo__ajuda", `Análises feitas nesta sessão: ${totalAnalises}`)
+  );
+}
+
+/** Limpa a área de resultados antes de uma nova análise. */
+export function limparResultados() {
+  document.querySelector("#painel-perfil").textContent = "";
+  document.querySelector("#destaque").textContent = "";
+  document.querySelector("#lista-vagas").textContent = "";
+}
