@@ -15,7 +15,7 @@ ordenação, tema claro/escuro e perfil salvo entre visitas.
 - **Quadro Kanban (Trello):** <https://trello.com/b/LaTinLbc>
 - **Vídeo de apresentação:** <https://drive.google.com/file/d/1dE8ySXL6QTW4LcRDbj-LYjsEJgXWJC11/view?usp=sharing>
 
-## 🧩 O problema que ele resolve
+## O problema que ele resolve
 
 Quem está começando em front-end olha uma vaga e não sabe responder: *"estou
 pronto para me candidatar? E se não estou, o que falta?"*. O SkillMatch responde
@@ -24,7 +24,7 @@ vaga, mostra o percentual de compatibilidade (com classificação Alta / Média 
 Baixa), lista o que o candidato **já tem** e o que **falta estudar**, e ainda
 recomenda as habilidades que destravam o maior número de vagas de uma vez.
 
-## ⚙️ Como executar
+## Como executar
 
 O projeto é estático (HTML + CSS + JavaScript puro) e **não precisa de
 instalação nem de back-end**. Como usa módulos ES e `fetch`, ele não funciona
@@ -47,7 +47,7 @@ roda sem Node):
 npm run dev
 ```
 
-## 🖥️ Fluxo de uso
+## Fluxo de uso
 
 ```text
 [ abrir a página ]
@@ -65,7 +65,7 @@ npm run dev
 [ persistência ] perfil e preferências (tema, ordenação) salvos para a próxima visita
 ```
 
-## 🗂️ Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 skillmatch-web/
@@ -91,7 +91,7 @@ A divisão segue a ideia **dados × regras × tela**: o `motor.js` não conhece 
 DOM, o `ui.js` não faz conta e o `dados.js` é o único que fala com a rede e o
 `localStorage`. O `main.js` liga tudo por `import`/`export`.
 
-## 🛠️ Técnicas e tecnologias utilizadas
+## Técnicas e tecnologias utilizadas
 
 | Conceito | Onde está no código |
 |---|---|
@@ -113,7 +113,7 @@ DOM, o `ui.js` não faz conta e o `dados.js` é o único que fala com a rede e o
 | Responsividade mobile-first | unidades fluidas (`rem`, `%`, `clamp`, `min()`), `meta viewport`, media queries em 48em e 64em, mídia fluida |
 | Módulos ES | `import`/`export` com `<script type="module">` |
 
-## 📐 Decisões técnicas
+## Decisões técnicas
 
 - **`const` por padrão, `let` só quando reatribuo.** Quase tudo é `const`
   (elementos do DOM, funções, resultados). `let` aparece onde o valor muda de
@@ -134,7 +134,7 @@ DOM, o `ui.js` não faz conta e o `dados.js` é o único que fala com a rede e o
 - **Segurança no `localStorage`.** Só ficam salvos dados não sensíveis (nome,
   área, habilidades, preferências) — nunca senha ou token.
 
-## 🚀 Melhorias futuras
+## Melhorias futuras
 
 - Consumir uma API pública de vagas no lugar do `vagas.json` local.
 - Usar a Geolocation API para sugerir vagas presenciais próximas.
